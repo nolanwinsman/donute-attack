@@ -27,6 +27,7 @@ def player(color):
 enemyImg = pygame.image.load('assets/alien.png')
 numEnemies = 4
 
+# Two random x, y cords withing the boundaries set.
 def enemyPlacements():
         x = random.randint(SCREEN_WIDTH/100, SCREEN_WIDTH-math.floor(SCREEN_WIDTH/50))
         y = random.randint(SCREEN_HEIGHT/100, SCREEN_HEIGHT-math.floor(SCREEN_HEIGHT/4))
