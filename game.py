@@ -24,20 +24,13 @@ def player(color):
 
 
 # Enemies
-enemyImg = pygame.image.load('assets/alien.png')
+enemyImg = 'assets/alien.png'
 numEnemies = 4
-
-# Two random x, y cords withing the boundaries set.
-def enemyPlacements():
-        x = random.randint(SCREEN_WIDTH/100, SCREEN_WIDTH-math.floor(SCREEN_WIDTH/50))
-        y = random.randint(SCREEN_HEIGHT/100, SCREEN_HEIGHT-math.floor(SCREEN_HEIGHT/4))
-        return x, y
 
 
 enemies = []
 for x in range(numEnemies):
-    x, y = enemyPlacements()
-    enemies.append(enemy(x, y, screen, enemyImg))
+    enemies.append(enemyObj(enemyImg))
 
 
 # Game Loop
@@ -58,6 +51,9 @@ while running:
     # Creates the enemies
     for e in enemies:
         e.draw(screen)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if e.collidepoint((mouseX, mouseY)):
+                print("Alien Clicked")
     
     # Creates Player and reticle
     player(c)

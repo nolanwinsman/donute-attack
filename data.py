@@ -1,6 +1,7 @@
 import pygame
 import math
 import random
+from PIL import Image
 
 class colors:
     def __init__(self):
@@ -20,20 +21,27 @@ class screen:
         self.width = 1600
         self.height = 900
 
-class enemy(object):
-    def __init__(self, x, y, screen, img):
-        self.x = x
-        self.y = y
-        self.velocity = 1
-        self.img = img
+class playerObj(object):
+    def __init__(self):
+        self.score = 0
+
+    def increaseScore(self, s):
+        self.score += s
+
+class enemyObj(object):
+    def __init__(self, img):
+        self.screenData = screen()
+        self.length, self.height = Image.open(img).size
+        self.x = random.randint(self.screenData.width/100, self.screenData.width-math.floor(self.screenData.width/50))
+        self.y = random.randint(self.screenData.height/100, self.screenData.height-math.floor(self.screenData.height/4))
+        self.img = pygame.image.load(img)
         self.deltaX = 0.3
         self.deltaY = -0.3
     
     def move(self):
-        screenData = screen()
-        if self.x >= screenData.width - math.floor(screenData.width/100) or self.x <= 0 + math.floor(screenData.width/100):
+        if self.x >= self.screenData.width - math.floor(self.screenData.width/100) or self.x <= 0 + math.floor(self.screenData.width/100):
             self.deltaX *= -1
-        if self.y >= screenData.height - math.floor(screenData.height/4) or self.y <= 0:
+        if self.y >= self.screenData.height - math.floor(self.screenData.height/4) or self.y <= 0:
             self.deltaY *= -1
         self.x += self.deltaX
         self.y += self.deltaY
@@ -42,4 +50,7 @@ class enemy(object):
     def draw(self, screen):
         self.move()
         screen.blit(self.img, (self.x, self.y))
+
+    def collidepoint(self, point):
+        return pygame.Rect(self.x, self.y, self.length, self.height).collidepoint(point)
 
