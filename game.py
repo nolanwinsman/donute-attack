@@ -19,11 +19,8 @@ pygame.display.set_caption("Light Gun Game")
 
 
 
-# Player
-def player(color):
-    pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0)) #hides the mouse
-    pygame.draw.rect(screen, color, (mouseX, mouseY, 10, 10)) #creates reticle
 
+player = playerObj()
 
 # Enemies
 enemyImg = 'assets/alien.png'
@@ -38,16 +35,17 @@ for x in range(10):
 running = True
 while running:
     for event in pygame.event.get():
-        c = colors.red
-        mouseX, mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
+        player.color = colors.red
+        player.mouseX, player.mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
         
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            c = colors.white
+            player.color = colors.white
             for e in enemies: #might find a way to do this without looping
-                if e.collidepoint((mouseX, mouseY)):
+                if e.collidepoint((player.mouseX, player.mouseY)):
                     e.health -= 1
+                    player.increaseScore(1)
     screen.fill(colors.darkBlue)
     # Updates the enemies
     for e in enemies:
@@ -55,6 +53,5 @@ while running:
 
     
     # Creates Player and reticle
-    player(c)
-
+    player.update(screen)
     pygame.display.update()
