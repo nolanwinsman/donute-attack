@@ -17,18 +17,14 @@ SCREEN_HEIGHT = screenData.height
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Light Gun Game")
 
-
-
-
+# Player
 player = playerObj()
 
 # Enemies
 enemyImg = 'assets/alien.png'
 numEnemies = 4
-
-
-enemies = []
-for x in range(10):
+enemies = [] # list of all the enemies
+for x in range(5):
     enemies.append(enemyObj(enemyImg))
 
 # Game Loop
@@ -40,18 +36,19 @@ while running:
         
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONUP:
             player.color = colors.white
             for e in enemies: #might find a way to do this without looping
                 if e.collidepoint((player.mouseX, player.mouseY)):
                     e.health -= 1
-                    player.increaseScore(1)
+                    player.score += 1
+    
     screen.fill(colors.darkBlue)
+    
     # Updates the enemies
     for e in enemies:
         e.update(screen)
 
-    
     # Creates Player and reticle
     player.update(screen)
     pygame.display.update()
