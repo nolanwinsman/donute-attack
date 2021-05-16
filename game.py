@@ -1,6 +1,8 @@
 import pygame
 import time
 from data import *
+from enemy import *
+from player import *
 import random
 import math
 
