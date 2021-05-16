@@ -29,31 +29,28 @@ numEnemies = 4
 
 
 enemies = []
-for x in range(numEnemies):
+for x in range(10):
     enemies.append(enemyObj(enemyImg))
-
 
 # Game Loop
 running = True
 while running:
     for event in pygame.event.get():
         c = colors.red
+        mouseX, mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
+        
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             c = colors.white
-    
+            for e in enemies: #might find a way to do this without looping
+                if e.collidepoint((mouseX, mouseY)):
+                    e.health -= 1
     screen.fill(colors.darkBlue)
-    mouseX, mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
-    bottom_border = SCREEN_HEIGHT-math.floor(SCREEN_HEIGHT/4)
-    #pygame.draw.line(screen, colors.white, (SCREEN_WIDTH, 0), (800, 800), 5)
-    
-    # Creates the enemies
+    # Updates the enemies
     for e in enemies:
-        e.draw(screen)
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if e.collidepoint((mouseX, mouseY)):
-                print("Alien Clicked")
+        e.update(screen)
+
     
     # Creates Player and reticle
     player(c)

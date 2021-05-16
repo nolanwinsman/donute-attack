@@ -37,7 +37,15 @@ class enemyObj(object):
         self.img = pygame.image.load(img)
         self.deltaX = 0.3
         self.deltaY = -0.3
+        self.health = 1
+        self.alive = True
     
+    def update(self, win):
+        if self.health >= 1:
+            self.draw(win)
+        else:
+            self.alive = False
+
     def move(self):
         if self.x >= self.screenData.width - math.floor(self.screenData.width/100) or self.x <= 0 + math.floor(self.screenData.width/100):
             self.deltaX *= -1
@@ -46,11 +54,10 @@ class enemyObj(object):
         self.x += self.deltaX
         self.y += self.deltaY
 
-
-    def draw(self, screen):
+    def draw(self, win):
         self.move()
-        screen.blit(self.img, (self.x, self.y))
+        win.blit(self.img, (self.x, self.y))
 
+    # If the enemy is clicked
     def collidepoint(self, point):
         return pygame.Rect(self.x, self.y, self.length, self.height).collidepoint(point)
-
