@@ -38,6 +38,7 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
             player.color = colors.white
+            player.height, player.length = 11, 11
             for e in enemies: #might find a way to do this without looping
                 if e.collidepoint((player.mouseX, player.mouseY)):
                     e.health -= 1

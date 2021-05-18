@@ -7,11 +7,13 @@ class playerObj(object):
         self.mouseX = 0 # Default values
         self.mouseY = 0
         self.ammo = 6
+        self.length = 10
+        self.height = 10
 
     def update(self, win):
         self.draw(win)
         
     def draw(self, win):
         pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0)) #hides the mouse
-        pygame.draw.rect(win, self.color, (self.mouseX, self.mouseY, 10, 10)) #creates reticle
+        pygame.draw.rect(win, self.color, (self.mouseX, self.mouseY, self.length, self.height)) #creates reticle
     

@@ -11,8 +11,8 @@ class enemyObj(object):
         self.x = random.randint(self.screenData.width/100, self.screenData.width-math.floor(self.screenData.width/50))
         self.y = random.randint(self.screenData.height/100, self.screenData.height-math.floor(self.screenData.height/4))
         self.img = pygame.image.load(img)
-        self.deltaX = 0.3
-        self.deltaY = -0.3
+        self.deltaX = 0.5
+        self.deltaY = -0.5
         self.health = 1
         self.alive = True
     
@@ -23,8 +23,10 @@ class enemyObj(object):
             self.alive = False
 
     def move(self):
+        # If the enemy is touching the left or right border
         if self.x >= self.screenData.width - math.floor(self.screenData.width/100) or self.x <= 0 + math.floor(self.screenData.width/100):
             self.deltaX *= -1
+        # If the enemy is touching the top or bottom border
         if self.y >= self.screenData.height - math.floor(self.screenData.height/4) or self.y <= 0:
             self.deltaY *= -1
         self.x += self.deltaX
