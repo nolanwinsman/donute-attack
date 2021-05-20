@@ -30,6 +30,7 @@ pygame.display.set_caption("Light Gun Game")
 
 # Player
 player = playerObj()
+bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
 enemyImg = 'assets/alien.png'
@@ -62,7 +63,9 @@ while running:
             player.color = color.white
             player.height, player.length = 11, 11
             player.ammo -= 1
-            for e in enemies: #might find a way to do this without looping
+            bulletSound.play()
+            # Check if any enemies are clicked
+            for e in enemies:
                 if e.collidepoint((player.mouseX, player.mouseY)):
                     e.health -= 1
                     player.score += 1
