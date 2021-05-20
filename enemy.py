@@ -19,7 +19,7 @@ class enemyObj(object):
     def update(self, win):
         if self.health >= 1:
             self.draw(win)
-        else:
+        else: 
             self.alive = False
 
     def move(self):
