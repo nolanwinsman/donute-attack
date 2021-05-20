@@ -13,8 +13,8 @@ import sys
 
 pygame.init()
 
-colors = colors()
-screenData = screen()
+# Colors
+color = colors()
 
 # Time
 clock = pygame.time.Clock()
@@ -22,6 +22,7 @@ current_time = 0
 button_press_time = 0
 
 # Screen
+screenData = screen()
 SCREEN_WIDTH = screenData.width
 SCREEN_HEIGHT = screenData.height
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -40,12 +41,11 @@ for x in range(5):
 # HUD
 HUD = hud()
 
-
 # Game Loop
 running = True
 while running:
     for event in pygame.event.get():
-        player.color = colors.red
+        player.color = color.red
         player.mouseX, player.mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
         if event.type == pygame.QUIT:
             running = False
@@ -57,8 +57,9 @@ while running:
             if event.key == pygame.K_r or event.key == pygame.K_SPACE:
                 player.reloadTime = pygame.time.get_ticks()
                 player.reloading = True
+        # Mouse click
         if event.type == pygame.MOUSEBUTTONUP and player.ammo > 0:
-            player.color = colors.white
+            player.color = color.white
             player.height, player.length = 11, 11
             player.ammo -= 1
             for e in enemies: #might find a way to do this without looping
@@ -73,18 +74,18 @@ while running:
         player.ammo = player.maxAmmo
         player.reloading = False
 
+    # Background
+    screen.fill(color.darkBlue)
     
-    screen.fill(colors.darkBlue)
+    # HUD
     HUD.update(screen)
-    # self, win, text, x, y, fontSize
     ammoText = "Ammo: " + str(player.ammo)
     HUD.ammo(screen, ammoText, HUD.ammoX, HUD.ammoY, 32, player.reloading)
 
-
-    # Updates the enemies
+    # Enemies
     for e in enemies:
         e.update(screen)
 
-    # Creates Player and reticle
+    # Player/Reticle
     player.update(screen)
     pygame.display.update()

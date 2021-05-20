@@ -6,8 +6,8 @@ class playerObj(object):
         self.color = colors().red
         self.mouseX = 0 # Default values
         self.mouseY = 0
-        self.ammo = 6
-        self.maxAmmo = 6
+        self.maxAmmo = 10
+        self.ammo = self.maxAmmo
         self.length = 10
         self.height = 10
         self.reloading = False
