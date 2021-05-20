@@ -25,11 +25,13 @@ button_press_time = 0
 screenData = screen()
 SCREEN_WIDTH = screenData.width
 SCREEN_HEIGHT = screenData.height
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
 pygame.display.set_caption("Light Gun Game")
 
 # Player
 player = playerObj()
+
+# Sounds
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
@@ -59,10 +61,8 @@ while running:
                 player.reloadTime = pygame.time.get_ticks()
                 player.reloading = True
         # Mouse click
-        if event.type == pygame.MOUSEBUTTONUP and player.ammo > 0:
-            player.color = color.white
-            player.height, player.length = 11, 11
-            player.ammo -= 1
+        if event.type == pygame.MOUSEBUTTONUP and player.ammo > 0 and not player.reloading:
+            player.singleShot()
             bulletSound.play()
             # Check if any enemies are clicked
             for e in enemies:
