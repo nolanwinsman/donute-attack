@@ -50,6 +50,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
+            # Press Esc to close game
+            if event.key == pygame.K_ESCAPE:
+                running = False
             # Player Reloads Weapon
             if event.key == pygame.K_r or event.key == pygame.K_SPACE:
                 player.reloadTime = pygame.time.get_ticks()
