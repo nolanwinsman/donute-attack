@@ -6,6 +6,7 @@ from hud import *
 import random
 import math
 import time
+import sys
 
 
 
@@ -46,10 +47,14 @@ while running:
     for event in pygame.event.get():
         player.color = colors.red
         player.mouseX, player.mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
-        
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.KEYDOWN:
+            # Player Reloads Weapon
+            if event.key == pygame.K_r or event.key == pygame.K_SPACE:
+                player.reloadTime = pygame.time.get_ticks()
+                player.reloading = True
+        if event.type == pygame.MOUSEBUTTONUP and player.ammo > 0:
             player.color = colors.white
             player.height, player.length = 11, 11
             player.ammo -= 1
@@ -57,12 +62,20 @@ while running:
                 if e.collidepoint((player.mouseX, player.mouseY)):
                     e.health -= 1
                     player.score += 1
+    # Time
+    current_time = pygame.time.get_ticks()
+    
+    # Ammo Reload
+    if current_time - player.reloadTime > 2500 and player.reloading:
+        player.ammo = player.maxAmmo
+        player.reloading = False
+
     
     screen.fill(colors.darkBlue)
     HUD.update(screen)
     # self, win, text, x, y, fontSize
     ammoText = "Ammo: " + str(player.ammo)
-    HUD.displayText(screen, ammoText, HUD.ammoX, HUD.ammoY, 32)
+    HUD.ammo(screen, ammoText, HUD.ammoX, HUD.ammoY, 32, player.reloading)
 
 
     # Updates the enemies
