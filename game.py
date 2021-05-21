@@ -32,6 +32,7 @@ pygame.display.set_caption("Light Gun Game")
 player = playerObj()
 
 # Sounds
+# TODO create sound class
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies

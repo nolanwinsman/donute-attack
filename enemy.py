@@ -8,8 +8,8 @@ class enemyObj(object):
     def __init__(self, img):
         self.screenData = screen()
         self.length, self.height = Image.open(img).size
-        self.x = random.randint(self.screenData.width/100, self.screenData.width-math.floor(self.screenData.width/50))
-        self.y = random.randint(self.screenData.height/100, self.screenData.height-math.floor(self.screenData.height/4))
+        self.x = random.randint(math.floor(self.screenData.width/100), self.screenData.width-math.floor(self.screenData.width/50))
+        self.y = random.randint(math.floor(self.screenData.height/100), self.screenData.height-math.floor(self.screenData.height/4))
         self.img = pygame.image.load(img)
         self.deltaX = 0.5
         self.deltaY = -0.5

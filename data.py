@@ -18,5 +18,5 @@ class colors:
 class screen:
     def __init__(self):
         # Define Screen
-        self.width = 1600
-        self.height = 900
+        self.width = 1920
+        self.height = 1080
