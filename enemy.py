@@ -11,8 +11,8 @@ class enemyObj(object):
         self.x = random.randint(math.floor(self.screenData.width/100), self.screenData.width-math.floor(self.screenData.width/50))
         self.y = random.randint(math.floor(self.screenData.height/100), self.screenData.height-math.floor(self.screenData.height/4))
         self.img = pygame.image.load(img)
-        self.deltaX = 0.5
-        self.deltaY = -0.5
+        self.deltaX = 0.9
+        self.deltaY = -0.9
         self.health = 1
         self.alive = True
     

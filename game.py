@@ -29,7 +29,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREE
 pygame.display.set_caption("Light Gun Game")
 
 # Player
-player = playerObj()
+playerImg = 'assets/crosshair.png'
+player = playerObj(playerImg)
 
 # Sounds
 # TODO create sound class
@@ -37,7 +38,7 @@ bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # T
 
 # Enemies
 enemyImg = 'assets/alien.png'
-numEnemies = 4
+numEnemies = 10
 enemies = [] # list of all the enemies
 for x in range(5):
     enemies.append(enemyObj(enemyImg))
