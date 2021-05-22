@@ -8,9 +8,6 @@ import math
 import time
 import sys
 
-
-
-
 pygame.init()
 
 # Colors
@@ -46,51 +43,86 @@ for x in range(5):
 # HUD
 HUD = hud()
 
+# Pause
+Pause = pause()
+
 # Game Loop
-running = True
-while running:
-    for event in pygame.event.get():
-        player.color = color.red
-        player.mouseX, player.mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN:
-            # Press Esc to close game
-            if event.key == pygame.K_ESCAPE:
+def game():
+    running = True
+    while running:
+        for event in pygame.event.get():
+            player.color = color.red
+            player.mouseX, player.mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
+            if event.type == pygame.QUIT:
                 running = False
-            # Player Reloads Weapon
-            if event.key == pygame.K_r or event.key == pygame.K_SPACE:
-                player.reloadTime = pygame.time.get_ticks()
-                player.reloading = True
-        # Mouse click
-        if event.type == pygame.MOUSEBUTTONUP and player.ammo > 0 and not player.reloading:
-            player.singleShot()
-            bulletSound.play()
-            # Check if any enemies are clicked
-            for e in enemies:
-                if e.collidepoint((player.mouseX, player.mouseY)):
-                    e.health -= 1
-                    player.score += 1
-    # Time
-    current_time = pygame.time.get_ticks()
+            if event.type == pygame.KEYDOWN:
+                # Press Esc to close game
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                # Player Reloads Weapon
+                elif event.key == pygame.K_r or event.key == pygame.K_SPACE:
+                    player.reloadTime = pygame.time.get_ticks()
+                    player.reloading = True
+                elif event.key == pygame.K_p:
+                    Pause.paused = not Pause.paused # toggles the boolean
+                    options()
+            # Mouse click
+            if event.type == pygame.MOUSEBUTTONUP and player.ammo > 0 and not player.reloading:
+                player.singleShot()
+                bulletSound.play()
+                # Check if any enemies are clicked
+                for e in enemies:
+                    if e.collidepoint((player.mouseX, player.mouseY)):
+                        e.health -= 1
+                        player.score += 1
+
+        # Time
+        current_time = pygame.time.get_ticks()
+        
+        # Ammo Reload
+        if current_time - player.reloadTime > 2500 and player.reloading:
+            player.ammo = player.maxAmmo
+            player.reloading = False
+
+        # Background
+        screen.fill(color.darkBlue)
+        
+        # HUD
+        HUD.update(screen)
+        ammoText = "Ammo: " + str(player.ammo)
+        HUD.ammo(screen, ammoText, HUD.ammoX, HUD.ammoY, 32, player.reloading)
+
+        # Enemies
+        for e in enemies:
+            e.update(screen)
+
+        # Player/Reticle
+        player.update(screen)
+        pygame.display.update()
+
+# The pause menu
+def options():
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                pygame.quit()
+                sys.exit
+            if event.type == pygame.KEYDOWN:
+                    # Press Esc to close game
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+                    # Player Reloads Weapon
+                    elif event.key == pygame.K_p:
+                        Pause.paused = not Pause
+                        running = False
     
-    # Ammo Reload
-    if current_time - player.reloadTime > 2500 and player.reloading:
-        player.ammo = player.maxAmmo
-        player.reloading = False
+        screen.fill(color.blue)
+        Pause.draw(screen)
+        pygame.display.update()
+            
 
-    # Background
-    screen.fill(color.darkBlue)
-    
-    # HUD
-    HUD.update(screen)
-    ammoText = "Ammo: " + str(player.ammo)
-    HUD.ammo(screen, ammoText, HUD.ammoX, HUD.ammoY, 32, player.reloading)
 
-    # Enemies
-    for e in enemies:
-        e.update(screen)
-
-    # Player/Reticle
-    player.update(screen)
-    pygame.display.update()
+if __name__ == "__main__":
+    game()

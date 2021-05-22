@@ -35,6 +35,7 @@ class hud:
         textDisplay = self.font.render(text , True, color)
         win.blit(textDisplay, (x, y))
     
+    # Not currently used
     def swapColor(self, color):
         if color is self.color.white:
             return self.color.red
