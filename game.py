@@ -105,6 +105,7 @@ def options():
     running = True
     while running:
         for event in pygame.event.get():
+            player.mouseX, player.mouseY = pygame.mouse.get_pos() #mouse x,y cordinates
             if event.type == pygame.QUIT:
                 running = False
                 pygame.quit()
@@ -119,7 +120,9 @@ def options():
                         running = False
     
         screen.fill(color.blue)
+        # Player/Reticle
         Pause.draw(screen)
+        player.update(screen)
         pygame.display.update()
             
 

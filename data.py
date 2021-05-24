@@ -29,9 +29,13 @@ class pause:
 
     def draw(self, win):
         pygame.draw.rect(win, self.color.red, (200, 200, 600, 100))
-        self.displayText(win, "Null", 200, 200, 32, self.color.white)
+        self.displayText(win, "Unpause", 200, 200, 32, self.color.white)
       
     def displayText(self, win, text, x, y, fontSize, color):
         self.font = pygame.font.Font('freesansbold.ttf', fontSize)
         textDisplay = self.font.render(text , True, color)
         win.blit(textDisplay, (x, y))
+
+    # If the box is clicked
+    def collidepoint(self, point):
+        return pygame.Rect(self.x, self.y, self.length, self.height).collidepoint(point)
