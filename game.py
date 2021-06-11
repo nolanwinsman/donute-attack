@@ -34,11 +34,13 @@ player = playerObj(playerImg)
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
-enemyImg = 'assets/alien.png'
+enemyImg = 'assets/temp_enemy.png'
 numEnemies = 10
 enemies = [] # list of all the enemies
 for x in range(5):
     enemies.append(enemyObj(enemyImg))
+
+
 
 # HUD
 HUD = hud()
@@ -49,6 +51,7 @@ Pause = pause()
 # Game Loop
 def game():
     running = True
+    enemy_spawn_time = random.randint(500, 2000)
     while running:
         for event in pygame.event.get():
             player.color = color.red
@@ -88,13 +91,20 @@ def game():
         screen.fill(color.darkBlue)
         
         # HUD
-        HUD.update(screen)
+        HUD.update(screen, player)
         ammoText = "Ammo: " + str(player.ammo)
         HUD.ammo(screen, ammoText, HUD.ammoX, HUD.ammoY, 32, player.reloading)
 
         # Enemies
-        for e in enemies:
+        tempEnemies = enemies
+        for e in tempEnemies:
             e.update(screen)
+            if e.health <= 0:
+                enemies.remove(e)
+        if current_time - enemy_spawn_time > 0:
+            enemy_spawn_time += random.randint(500, 2000)
+            enemies.append(enemyObj(enemyImg))
+
 
         # Player/Reticle
         player.update(screen)

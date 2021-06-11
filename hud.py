@@ -21,14 +21,29 @@ class hud:
         # Reload
         self.reloadX = math.floor(self.win.width/20)
         self.reloadY = self.win.height - math.floor(self.win.height/7)
+
+        #Sets the image and scales it
+        img = 'assets/bullet.png'
+        self.img = pygame.image.load(img)
+        self.length, self.height = Image.open(img).size
+        self.length, self.height = math.floor(self.length*1.6), math.floor(self.height*1.6)
+        self.img = pygame.transform.scale(self.img, (self.length, self.height))
     
-    def update(self, win):
-        self.draw(win)
+    def update(self, win, player):
+        if not player.reloading:
+            self.drawBullets(win, player)
+        self.displayText(win, "SCORE: " + str(player.score), self.ammoX, 980, 32, self.color.white)
         
 
-    def draw(self, win):
+    def drawBullets(self, win, player):
         #pygame.draw.rect(win, self.color, (self.mouseX, self.mouseY, self.length, self.height)) #creates reticle
-        pygame.draw.rect(win, self.color.black, (0, self.y, self.win.width, self.win.height)) #creates hud
+        #pygame.draw.rect(win, self.color.black, (0, self.y, self.win.width, self.win.height)) #creates hud
+        x, y = self.ammoX-25, 895
+        for ammo in range(player.ammo):
+            win.blit(self.img, (x, y))
+            #pygame.draw.rect(win, self.color.white, (x, y, 10, 40))
+            x += 15
+
     
     def displayText(self, win, text, x, y, fontSize, color):
         self.font = pygame.font.Font('freesansbold.ttf', fontSize)

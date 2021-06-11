@@ -7,12 +7,23 @@ import random
 class enemyObj(object):
     def __init__(self, img):
         self.screenData = screen()
-        self.length, self.height = Image.open(img).size
+
+        #Random coordinates for where they spawn
         self.x = random.randint(math.floor(self.screenData.width/100), self.screenData.width-math.floor(self.screenData.width/50))
         self.y = random.randint(math.floor(self.screenData.height/100), self.screenData.height-math.floor(self.screenData.height/4))
+        
+        #Sets the image and scales it
         self.img = pygame.image.load(img)
-        self.deltaX = 0.9
-        self.deltaY = -0.9
+        self.length, self.height = Image.open(img).size
+        self.length, self.height = self.length*5, self.height*5
+        self.img = pygame.transform.scale(self.img, (self.length, self.height))
+        
+        
+        #Affects how fast the sprite moves
+        self.deltaX = 1.5
+        self.deltaY = -1.5
+        
+        #Health
         self.health = 1
         self.alive = True
     
