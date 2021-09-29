@@ -43,6 +43,7 @@ class enemyObj(object):
         self.x += self.deltaX
         self.y += self.deltaY
 
+    # displays the image of the sprite
     def draw(self, win):
         self.move()
         win.blit(self.img, (self.x, self.y))
