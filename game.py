@@ -36,8 +36,8 @@ player = playerObj(playerImg)
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
-pink_img = 'assets/donut/Donut.png'
-red_img = 'assets/donut/defeated_red/red_donut-1.png'
+pink_img = 'assets/donut/pink_donut.png'
+red_img = 'assets/donut/red_donut.png'
 numEnemies = 10
 enemies = pygame.sprite.Group() # list of all the enemies
 for x in range(5):

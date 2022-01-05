@@ -19,7 +19,7 @@ class pink_donut(pygame.sprite.Sprite):
         self.current_sprite = 0
         self.sprites = [pygame.transform.scale(pygame.image.load(img), (self.length, self.height))]
         for i in range(1,8):
-            frame = pygame.image.load(f'assets/donut/defeated/Donut_Shot_Animated-{i}.png')
+            frame = pygame.image.load(f'assets/donut/defeated_pink/Donut_Shot_Animated-{i}.png')
             self.sprites.append(pygame.transform.scale(frame, (self.length, self.height)))
         # the larger the number the faster the animation
         self.animation_speed = 0.1
@@ -75,11 +75,7 @@ class red_donut(pink_donut):
     def __init__(self, img):
         super().__init__(img)
 
-        self.animation_speed = 0.15
-        self.length, self.height = self.length/3, self.height/3
-
-        self.current_sprite = 0
         self.sprites = [pygame.transform.scale(pygame.image.load(img), (self.length, self.height))]
-        for i in range(1,9):
-            frame = pygame.image.load(f'assets/donut/defeated_red/red_donut-{i}.png')
+        for i in range(1,8):
+            frame = pygame.image.load(f'assets/donut/defeated_red/red_Shot_Animated-{i}.png')
             self.sprites.append(pygame.transform.scale(frame, (self.length, self.height)))
