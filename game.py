@@ -26,23 +26,25 @@ SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Light Gun Game")
+bg = pygame.transform.scale(pygame.image.load('assets/background/desert.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Player
 playerImg = 'assets/crosshair.png'
 player = playerObj(playerImg)
 
 # Sounds
-# TODO create sound class
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
 pink_img = 'assets/donut/pink_donut.png'
 red_img = 'assets/donut/red_donut.png'
+blue_img = 'assets/donut/blue_donut.png'
 numEnemies = 10
 enemies = pygame.sprite.Group() # list of all the enemies
 for x in range(5):
     enemies.add(pink_donut(pink_img))
     enemies.add(red_donut(red_img))
+    enemies.add(blue_donut(blue_img))
 
 
 
@@ -85,8 +87,8 @@ def game():
                         player.score += 1
 
         # Background
-        screen.fill(color.white)
-        # screen.blit(bg, (0, 0))
+        # screen.fill(color.black)
+        screen.blit(bg, (0, 0))
 
         # Time
         current_time = pygame.time.get_ticks()
@@ -112,8 +114,10 @@ def game():
             if e.alive is False:
                 enemies.remove(e)
         if current_time - enemy_spawn_time > 0:
-            enemy_spawn_time += random.randint(500, 1800)
-            enemies.add(random_enemy())
+            enemy_spawn_time += random.randint(500, 1000)
+            print(len(enemies))
+            if len(enemies) < 20:
+                enemies.add(random_enemy())
             # enemies.add(pink_donut(pink_img))
 
 
@@ -147,10 +151,12 @@ def options():
         pygame.display.update()
 
 def random_enemy():
-    options = ['pink', 'red']
+    options = ['pink', 'red', 'blue']
     result = random.choice(options)
     if result == 'red':
         return red_donut(red_img)
+    if result == 'blue':
+        return blue_donut(blue_img)
     else:
         return pink_donut(pink_img)
 
