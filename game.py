@@ -20,9 +20,11 @@ button_press_time = 0
 
 # Screen
 screenData = screen()
-SCREEN_WIDTH = screenData.width
-SCREEN_HEIGHT = screenData.height
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
+# SCREEN_WIDTH = screenData.width
+# SCREEN_HEIGHT = screenData.height
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 900
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Light Gun Game")
 
 # Player
@@ -34,7 +36,7 @@ player = playerObj(playerImg)
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
-enemyImg = 'assets/temp_enemy.png'
+enemyImg = 'assets/Donut.png'
 numEnemies = 10
 enemies = [] # list of all the enemies
 for x in range(5):
