@@ -40,7 +40,7 @@ enemyImg = 'assets/Donut.png'
 numEnemies = 10
 enemies = pygame.sprite.Group() # list of all the enemies
 for x in range(5):
-    enemies.add(enemyObj(enemyImg))
+    enemies.add(pink_donut(enemyImg))
 
 
 
@@ -108,8 +108,8 @@ def game():
             if e.alive is False:
                 enemies.remove(e)
         if current_time - enemy_spawn_time > 0:
-            enemy_spawn_time += random.randint(1000, 3000)
-            enemies.add(enemyObj(enemyImg))
+            enemy_spawn_time += random.randint(500, 1800)
+            enemies.add(pink_donut(enemyImg))
 
 
         # Player/Reticle

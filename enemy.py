@@ -3,9 +3,8 @@ from PIL import Image
 from data import screen
 import math
 import random
-import time
 
-class enemyObj(pygame.sprite.Sprite):
+class pink_donut(pygame.sprite.Sprite):
     def __init__(self, img):
         super().__init__()
         self.screenData = screen()
@@ -16,21 +15,16 @@ class enemyObj(pygame.sprite.Sprite):
         
         #Sets the image and scales it
         self.length, self.height = Image.open(img).size
-        self.length, self.height = self.length*5, self.height*5
+        self.length, self.height = self.length*10, self.height*10
         self.current_sprite = 0
         self.sprites = [pygame.transform.scale(pygame.image.load(img), (self.length, self.height))]
         for i in range(1,8):
             frame = pygame.image.load(f'assets/donut/defeated/Donut_Shot_Animated-{i}.png')
             self.sprites.append(pygame.transform.scale(frame, (self.length, self.height)))
-        
-        self.animation_speed = 0.045
+        # the larger the number the faster the animation
+        self.animation_speed = 0.1
 
-        self.image = self.sprites[int(self.current_sprite)]
-        self.rect = self.image.get_rect()
-        self.rect.topleft = [self.x, self.y]
-        
-
-        
+        self.image = self.sprites[int(self.current_sprite)] # cast to int for animation_speed
         
         #Affects how fast the sprite moves
         self.deltaX = 1.5
