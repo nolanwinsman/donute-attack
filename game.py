@@ -36,12 +36,13 @@ player = playerObj(playerImg)
 bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # Temp sound
 
 # Enemies
-enemyImg = 'assets/donut/Donut.png'
+pink_img = 'assets/donut/Donut.png'
+red_img = 'assets/donut/defeated_red/red_donut-1.png'
 numEnemies = 10
 enemies = pygame.sprite.Group() # list of all the enemies
 for x in range(5):
-    enemies.add(pink_donut(enemyImg))
-    enemies.add(red_donut('assets/donut/defeated_red/red_donut-1.png'))
+    enemies.add(pink_donut(pink_img))
+    enemies.add(red_donut(red_img))
 
 
 
@@ -84,7 +85,7 @@ def game():
                         player.score += 1
 
         # Background
-        screen.fill(color.darkBlue)
+        screen.fill(color.white)
         # screen.blit(bg, (0, 0))
 
         # Time
@@ -112,7 +113,8 @@ def game():
                 enemies.remove(e)
         if current_time - enemy_spawn_time > 0:
             enemy_spawn_time += random.randint(500, 1800)
-            enemies.add(pink_donut(enemyImg))
+            enemies.add(random_enemy())
+            # enemies.add(pink_donut(pink_img))
 
 
         # Player/Reticle
@@ -143,6 +145,15 @@ def options():
         Pause.draw(screen)
         player.update(screen)
         pygame.display.update()
+
+def random_enemy():
+    options = ['pink', 'red']
+    result = random.choice(options)
+    if result == 'red':
+        return red_donut(red_img)
+    else:
+        return pink_donut(pink_img)
+
             
 
 
