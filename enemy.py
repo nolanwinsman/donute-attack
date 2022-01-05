@@ -23,7 +23,7 @@ class enemyObj(pygame.sprite.Sprite):
             frame = pygame.image.load(f'assets/donut/defeated/Donut_Shot_Animated-{i}.png')
             self.sprites.append(pygame.transform.scale(frame, (self.length, self.height)))
         
-        self.animation_speed = 0.05
+        self.animation_speed = 0.045
 
         self.image = self.sprites[int(self.current_sprite)]
         self.rect = self.image.get_rect()
@@ -41,12 +41,10 @@ class enemyObj(pygame.sprite.Sprite):
         self.alive = True
     
     def update(self, win):
+        self.draw(win)
         self.image = self.sprites[int(self.current_sprite)]
-        if self.health >= 1:
-            self.draw(win)
-        else:
+        if self.health < 1:
             self.current_sprite += self.animation_speed
-            self.draw(win)
             if self.current_sprite > 7:
                 self.alive = False
 

@@ -101,7 +101,7 @@ def game():
         # Enemies
 
         tempEnemies = enemies
-        enemies.draw(screen)
+        # enemies.draw(screen)
         enemies.update(screen)
         for e in tempEnemies:
             # e.update(screen)
