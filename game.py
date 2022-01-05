@@ -22,8 +22,8 @@ button_press_time = 0
 screenData = screen()
 # SCREEN_WIDTH = screenData.width
 # SCREEN_HEIGHT = screenData.height
-SCREEN_WIDTH = 1600
-SCREEN_HEIGHT = 900
+SCREEN_WIDTH = 1920
+SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Light Gun Game")
 
@@ -38,9 +38,9 @@ bulletSound = pygame.mixer.Sound('sounds/aturax_tyrepressurerelease_01.wav') # T
 # Enemies
 enemyImg = 'assets/Donut.png'
 numEnemies = 10
-enemies = [] # list of all the enemies
+enemies = pygame.sprite.Group() # list of all the enemies
 for x in range(5):
-    enemies.append(enemyObj(enemyImg))
+    enemies.add(enemyObj(enemyImg))
 
 
 
@@ -77,8 +77,9 @@ def game():
                 bulletSound.play()
                 # Check if any enemies are clicked
                 for e in enemies:
+                    # if enemy is clicked
                     if e.collidepoint((player.mouseX, player.mouseY)):
-                        e.health -= 1
+                        e.shot(screen)
                         player.score += 1
 
         # Time
@@ -98,14 +99,17 @@ def game():
         HUD.ammo(screen, ammoText, HUD.ammoX, HUD.ammoY, 32, player.reloading)
 
         # Enemies
+
         tempEnemies = enemies
+        enemies.draw(screen)
+        enemies.update(screen)
         for e in tempEnemies:
-            e.update(screen)
-            if e.health <= 0:
+            # e.update(screen)
+            if e.alive is False:
                 enemies.remove(e)
         if current_time - enemy_spawn_time > 0:
-            enemy_spawn_time += random.randint(500, 2000)
-            enemies.append(enemyObj(enemyImg))
+            enemy_spawn_time += random.randint(1000, 3000)
+            enemies.add(enemyObj(enemyImg))
 
 
         # Player/Reticle
