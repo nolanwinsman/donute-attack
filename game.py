@@ -41,6 +41,7 @@ numEnemies = 10
 enemies = pygame.sprite.Group() # list of all the enemies
 for x in range(5):
     enemies.add(pink_donut(enemyImg))
+    enemies.add(red_donut('assets/donut/defeated_red/red_donut-1.png'))
 
 
 
