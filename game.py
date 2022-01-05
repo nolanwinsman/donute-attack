@@ -82,6 +82,10 @@ def game():
                         e.shot(screen)
                         player.score += 1
 
+        # Background
+        screen.fill(color.darkBlue)
+        # screen.blit(bg, (0, 0))
+
         # Time
         current_time = pygame.time.get_ticks()
         
@@ -90,8 +94,6 @@ def game():
             player.ammo = player.maxAmmo
             player.reloading = False
 
-        # Background
-        screen.fill(color.darkBlue)
         
         # HUD
         HUD.update(screen, player)
