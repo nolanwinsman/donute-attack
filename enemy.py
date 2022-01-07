@@ -38,10 +38,6 @@ class pink_donut(pygame.sprite.Sprite):
     
     def update(self, win):
         self.draw(win)
-        if self.current_sprite > 5:
-                print('STOP')
-                time.sleep(20)
-                quit()
         self.image = self.sprites[int(self.current_sprite)]
         if self.health < 1:
             self.current_sprite += self.animation_speed

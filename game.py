@@ -22,11 +22,10 @@ button_press_time = 0
 screenData = screen()
 # SCREEN_WIDTH = screenData.width
 # SCREEN_HEIGHT = screenData.height
-SCREEN_WIDTH = 512 * 2.1  
-SCREEN_HEIGHT = 512 * 2.1
+SCREEN_WIDTH = 1920  
+SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Light Gun Game")
-bg = pygame.transform.scale(pygame.image.load('assets/background/desert.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Player
 playerImg = 'assets/crosshair.png'
@@ -87,8 +86,7 @@ def game():
                         player.score += 1
 
         # Background
-        # screen.fill(color.black)
-        screen.blit(bg, (0, 0))
+        screen.fill(color.black)
 
         # Time
         current_time = pygame.time.get_ticks()
@@ -105,7 +103,6 @@ def game():
         HUD.ammo(screen, ammo_text, HUD.ammoX, HUD.ammoY, 32, player.reloading)
 
         # Enemies
-
         tempEnemies = enemies
         # enemies.draw(screen)
         enemies.update(screen)
@@ -115,7 +112,7 @@ def game():
                 enemies.remove(e)
         if current_time - enemy_spawn_time > 0:
             enemy_spawn_time += random.randint(500, 1000)
-            if len(enemies) < 20:
+            if len(enemies) < 25:
                 enemies.add(random_enemy())
             # enemies.add(pink_donut(pink_img))
 
