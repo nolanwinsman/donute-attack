@@ -1,6 +1,6 @@
-### Light Gun Game
+### Donut Attack
 
-My first Python game
+My first Python game inspired by classic games like [Time Crisis](https://www.youtube.com/watch?v=PBHirD7kEVE) and [Duck Hunt](https://www.youtube.com/watch?v=J3sfsP9W048)
 
 ![](gifs/gameplay.gif)
 
