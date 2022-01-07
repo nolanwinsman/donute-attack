@@ -1,0 +1,21 @@
+# CS-Club-Discord-Bot-2-Electric-Boogaloo
+
+A Group project for CS Club to practice working on a coding project as a large group
+
+# Table of Contents
+
+# Built With
+
+# Getting Started
+
+- run the file exec.py and the bot should come online in the discord group 'CS Club Discord Bot Testing Grounds'
+Then on the discord, run .help to see availible commands
+
+### Prerequisites
+
+* Python
+* pip
+* Internet
+
+## Enviromental Variables
+pygame
