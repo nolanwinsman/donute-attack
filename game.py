@@ -25,7 +25,7 @@ screenData = screen()
 SCREEN_WIDTH = 1920  
 SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Light Gun Game")
+pygame.display.set_caption("Donut Attack")
 
 # Player
 playerImg = 'assets/crosshair.png'
@@ -44,8 +44,6 @@ for x in range(5):
     enemies.add(pink_donut(pink_img))
     enemies.add(red_donut(red_img))
     enemies.add(blue_donut(blue_img))
-
-
 
 # HUD
 HUD = hud()
@@ -96,7 +94,6 @@ def game():
             player.ammo = player.maxAmmo
             player.reloading = False
 
-        
         # HUD
         HUD.update(screen, player)
         ammo_text = "Ammo: " + str(player.ammo)
@@ -114,7 +111,6 @@ def game():
             enemy_spawn_time += random.randint(500, 1000)
             if len(enemies) < 25:
                 enemies.add(random_enemy())
-            # enemies.add(pink_donut(pink_img))
 
 
         # Player/Reticle
