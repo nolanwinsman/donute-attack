@@ -19,7 +19,7 @@ My first Python game inspired by classic games like [Time Crisis](https://www.yo
 
 1. Clone the repo
 ```sh
-git clone https://github.com/SU-CS-Club/CS-Club-Discord-Bot-2-Electric-Boogaloo
+git clone https://github.com/nolanwinsman/donute-attack.git
 ```
 2. Install Python modules
 ```sh
@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 Nolan Winsman - [@Github](https://github.com/nolanwinsman) - nolanwinsman@gmail.com
 
-Project Link: [https://github.com/SU-CS-Club/CS-Club-Discord-Bot-2-Electric-Boogaloo](https://github.com/SU-CS-Club/CS-Club-Discord-Bot-2-Electric-Boogaloo)
+Project Link: [https://github.com/SU-CS-Club/CS-Club-Discord-Bot-2-Electric-Boogaloo](https://github.com/nolanwinsman/donute-attack)
 
 # Contributers
 - nolanwinsman
