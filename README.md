@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 Nolan Winsman - [@Github](https://github.com/nolanwinsman) - nolanwinsman@gmail.com
 
-Project Link: [https://github.com/SU-CS-Club/CS-Club-Discord-Bot-2-Electric-Boogaloo](https://github.com/nolanwinsman/donute-attack)
+Project Link: [https://github.com/nolanwinsman/donute-attack](https://github.com/nolanwinsman/donute-attack)
 
 # Contributers
 - nolanwinsman
